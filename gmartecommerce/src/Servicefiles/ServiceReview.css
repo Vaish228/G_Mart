@@ -1,0 +1,151 @@
+.our-service {
+  text-align: center;
+  background: #fff;
+  padding: 40px 20px;
+}
+
+.our-service h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.service-card {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+  width: 220px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.service-card h4 {
+  margin: 12px 0 6px;
+  font-size: 16px;
+  color: black;
+}
+
+.service-card p {
+  font-size: 13px;
+}
+
+.customer-review {
+  background: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.customer-review h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.review-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.review-card {
+  background-color: orange;
+  color: white;
+  padding: 20px;
+  width: 260px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.review-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.review-card h4 {
+  margin: 10px 0 5px;
+  color: black;
+}
+
+.review-card span {
+  font-size: 12px;
+  color: #fff9;
+}
+
+.review-card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.stars {
+  font-size: 16px;
+}
+@media (max-width: 900px) {
+  .service-cards, .review-cards {
+    justify-content: center;
+  }
+}
+.our-service {
+  text-align: center;
+  background-color: #fff;
+  padding: 40px 20px;
+}
+
+.our-service h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.service-row {
+  background-color: orange;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 10px;
+  border-radius: 8px;
+  color: white;
+  gap: 20px;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 240px;
+}
+
+.service-item h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+.service-item p {
+  margin: 0;
+  font-size: 13px;
+}
+
+
+@media (max-width: 768px) {
+  .service-row {
+    flex-direction: column;
+  }
+
+  .service-item {
+    justify-content: center;
+    text-align: center;
+  }
+}
