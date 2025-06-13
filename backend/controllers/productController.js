@@ -88,46 +88,61 @@ const productController = {
   },
 
   // Create new product with image upload
-  createProduct: async (req, res) => {
+  createProduct : async (req, res) => {
     try {
-      const productData = { ...req.body };
-      
-      // Add image URL if file was uploaded
-      if (req.file) {
-        productData.image = req.file.path;
-  productData.imagePublicId = req.file.filename || req.file.public_id; // Cloudinary URL
+      const { name, price, originalPrice, qty, discount, rating, categoryId, subcategoryId } = req.body;
+  
+      // Image uploaded via Multer (CloudinaryStorage)
+      let image, imagePublicId;
+      if (req.file && req.file.path) {
+        image = req.file.path; // Cloudinary URL
+        imagePublicId = req.file.filename; // Cloudinary public ID
       }
-
-      const product = new Product(productData);
+  
+      const product = new Product({
+        name,
+        price,
+        originalPrice,
+        qty,
+        discount,
+        rating,
+        categoryId,
+        subcategoryId,
+        image,
+        imagePublicId
+      });
+  
       const savedProduct = await product.save();
+  
+      // Populate category & subcategory
       await savedProduct.populate([
         { path: 'categoryId', select: 'name' },
         { path: 'subcategoryId', select: 'name' }
       ]);
-      
+  
       res.status(201).json({
         success: true,
         data: savedProduct,
         message: 'Product created successfully'
       });
+  
     } catch (error) {
-      // Delete uploaded image if product creation fails
-      if (req.file) {
+      // Rollback: delete uploaded image if any error occurs
+      if (req.file && req.file.filename) {
         try {
-          await cloudinary.uploader.destroy(req.file.filename || req.file.public_id);
-        } catch (deleteError) {
-          console.error('Error deleting image:', deleteError);
+          await cloudinary.uploader.destroy(req.file.filename);
+        } catch (delErr) {
+          console.error('Failed to delete image after error:', delErr);
         }
       }
-      
+  
       res.status(400).json({
         success: false,
         message: 'Error creating product',
         error: error.message
       });
     }
-  },
-
+  },  
   // Update product with optional image upload
   updateProduct: async (req, res) => {
     try {
@@ -264,7 +279,7 @@ await cloudinary.uploader.destroy(publicId);
           message: 'No image file provided'
         });
       }
-
+      console.log("hello");
       res.json({
         success: true,
         data: {
